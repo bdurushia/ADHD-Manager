@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.9.34622.214
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ADHD-Manager", "ADHD-Manager\ADHD-Manager.csproj", "{DFA4A839-9EFA-42B1-A52C-AA6BB24F587D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DFA4A839-9EFA-42B1-A52C-AA6BB24F587D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DFA4A839-9EFA-42B1-A52C-AA6BB24F587D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DFA4A839-9EFA-42B1-A52C-AA6BB24F587D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DFA4A839-9EFA-42B1-A52C-AA6BB24F587D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {193D57CE-D850-4A86-AA3E-DC1A5C4D0215}
+	EndGlobalSection
+EndGlobal
