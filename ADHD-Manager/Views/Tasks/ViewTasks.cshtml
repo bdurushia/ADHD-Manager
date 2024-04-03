@@ -1,0 +1,43 @@
+﻿@model Tasks
+
+<div class="card m-2 p-3" style="width: 40rem;">
+    <div class="d-flex flex-row align-items-center justify-content-between">
+        <h3 class="card-title m-1">@Model.Title</h3>
+        @switch (Model.CategoryId)
+        {
+            case 1:
+                <h6 class="card-subtitle m-1">Work</h6>
+                break;
+            case 2:
+                <h6 class="card-subtitle m-1">Personal</h6>
+                break;
+            case 3:
+                <h6 class="card-subtitle m-1">Home</h6>
+                break;
+            case 4:
+                <h6 class="card-subtitle m-1">Shopping</h6>
+                break;
+            case 5:
+                <h6 class="card-subtitle m-1"></h6>
+                break;
+        }
+    </div>
+
+    <div class="card-body">
+        <h6 class="card-subtitle mb-2 text-body-secondary">Due-Date: @Model.DueDate.ToString("MM-dd-yyyy h:mm tt")</h6>
+        <p class="card-text m-2">@Model.Description</p>
+        @switch (Model.StatusId)
+        {
+            case 1:
+                <h6 class="card-subtitle">Status: Open</h6>
+                break;
+            case 2:
+                <h6 class="card-subtitle">Status: Completed</h6>
+                break;
+            case 3:
+                <h6 class="card-subtitle">Status: Over Due</h6>
+                break;
+        }
+        <a class="btn btn-outline-dark text-bg-dark" href="/Tasks/UpdateTasks/@Model.TaskID">Edit</a>
+    </div>
+</div>

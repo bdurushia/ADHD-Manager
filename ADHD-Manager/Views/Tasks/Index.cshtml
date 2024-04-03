@@ -1,0 +1,55 @@
+﻿
+@model IEnumerable<Tasks>
+
+<h2>Tasks</h2>
+
+<div class="d-flex flex-row m-3">
+
+    @foreach (var task in Model)
+    {
+        <div class="card m-2" style="width: 40rem;">
+            <div class="card-body">
+                <div class="d-flex flex-row align-items-center justify-content-between">
+                    <h5 class="card-title mb-2">@task.Title</h5>
+                    @switch (task.CategoryId)
+                    {
+                        case 1:
+                            <h6 class="card-subtitle mb-2">Work</h6>
+                            break;
+                        case 2:
+                            <h6 class="card-subtitle mb-2">Personal</h6>
+                            break;
+                        case 3:
+                            <h6 class="card-subtitle mb-2">Home</h6>
+                            break;
+                        case 4:
+                            <h6 class="card-subtitle mb-2">Shopping</h6>
+                            break;
+                        case 5:
+                            <h6 class="card-subtitle mb-2"></h6>
+                            break;
+                    }
+                </div>
+                <h6 class="card-subtitle mb-2 text-body-secondary">Due-Date: @task.DueDate.ToString("MM-dd-yyyy h:mm tt")</h6>
+                <p class="card-text m-2">@task.Description</p>
+                @switch (task.StatusId)
+                {
+                    case 1:
+                        <h6 class="card-subtitle mb-2">Status: Open</h6>
+                        break;
+                    case 2:
+                        <h6 class="card-subtitle mb-2">Status: Completed</h6>
+                        break;
+                    case 3:
+                        <h6 class="card-subtitle mb-2">Status: Over Due</h6>
+                        break;
+                }
+                <div class="d-flex flex-row">
+                    <a class="btn btn-outline-dark text-bg-dark me-2" href="/Tasks/ViewTasks/@task.TaskID">View </a>
+                    <a class="btn btn-outline-dark text-bg-dark ms-2 me-2" href="/Tasks/UpdateTasks/@task.TaskID">Edit</a>
+                </div>
+            </div>
+        </div>
+    }
+ 
+</div>

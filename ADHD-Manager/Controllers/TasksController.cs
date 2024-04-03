@@ -1,0 +1,52 @@
+﻿using ADHD_Manager.Models;
+using ADHD_Manager.Models.Data;
+using Microsoft.AspNetCore.Mvc;
+
+namespace ADHD_Manager.Controllers
+{
+    public class TasksController : Controller
+    {
+        private readonly ITasksRepository repo;
+
+        public TasksController(ITasksRepository repo)
+        {
+            this.repo = repo;
+        }
+
+        public IActionResult Index()
+        {
+            var tasks = repo.GetAllTasks();
+            return View(tasks);
+        }
+
+        public IActionResult ViewTasks(int id)
+        {
+            var task = repo.GetTask(id);
+            return View(task);
+        }
+
+        public IActionResult UpdateTasks(int id)
+        {
+            Tasks task = repo.GetTask(id);
+
+            var statusList = repo.GetStatus();
+            var categoriesList = repo.GetCategories();
+
+            task.Categories = categoriesList;
+            task.Statuses = statusList;
+
+
+            if (task == null)
+            {
+                return View("Error: TaskNotFound");
+            }
+            return View(task);
+        }
+
+        public IActionResult UpdateTaskToDatabase(Tasks task)
+        {
+            repo.UpdateTasks(task);
+            return RedirectToAction("ViewTasks", new { id = task.TaskID });
+        }
+    }
+}
