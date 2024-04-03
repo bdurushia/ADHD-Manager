@@ -8,13 +8,11 @@ namespace ADHD_Manager.Models.Data
         public Tasks GetTask(int taskId);
         public void InsertTasks(Tasks taskToInsert);
         public void UpdateTasks(Tasks task);
-        public void DeleteTasks(int taskId);
+        public void DeleteTasks(Tasks task);
 
         public IEnumerable<Category> GetCategories();
-        public Tasks AssignCategory();
+        public Tasks AssignCategoryAndStatus();
 
         public IEnumerable<Status> GetStatus();
-        public Tasks UpdateStatus();
-        public Tasks AssignStatus();
     }
 }

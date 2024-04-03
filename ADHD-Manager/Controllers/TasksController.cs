@@ -48,5 +48,23 @@ namespace ADHD_Manager.Controllers
             repo.UpdateTasks(task);
             return RedirectToAction("ViewTasks", new { id = task.TaskID });
         }
+
+        public IActionResult InsertTasks()
+        {
+            var newTask = repo.AssignCategoryAndStatus();
+            return View(newTask);
+        }
+
+        public IActionResult InsertTaskToDatabase(Tasks taskToInsert)
+        {
+            repo.InsertTasks(taskToInsert);
+            return RedirectToAction("Index");
+        }
+
+        public IActionResult DeleteTasks(Tasks task)
+        {
+            repo.DeleteTasks(task);
+            return RedirectToAction("Index");
+        }
     }
 }

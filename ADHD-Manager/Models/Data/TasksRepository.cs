@@ -24,12 +24,6 @@ namespace ADHD_Manager.Models.Data
             return _conn.QuerySingle<Tasks>("SELECT * FROM tasks WHERE TaskID = @taskId;", new { taskId = taskId });
         }
 
-        public void InsertTasks(Tasks taskToInsert)
-        {
-            _conn.Execute("INSERT INTO tasks (Title, Description, DueDate, CategoryID, StatusID);", 
-                new { title = taskToInsert.Title, description = taskToInsert.Description,
-                      dueDate = taskToInsert.DueDate, categoryId = taskToInsert.CategoryId, statusId = taskToInsert.StatusId });
-        }
         public void UpdateTasks(Tasks task)
         {
             _conn.Execute("UPDATE tasks SET Title = @title, Description = @description, " +
@@ -37,9 +31,12 @@ namespace ADHD_Manager.Models.Data
                           new { title = task.Title, description = task.Description, dueDate = task.DueDate, 
                               categoryId = task.CategoryId, statusId = task.StatusId, taskId = task.TaskID });
         }
-        public void DeleteTasks(int taskId)
+        public void InsertTasks(Tasks taskToInsert)
         {
-            throw new NotImplementedException();
+            _conn.Execute("INSERT INTO tasks (Title, Description, DueDate, CategoryID, StatusID) " +
+                          "VALUES (@title, @description, @dueDate, @categoryId, @statusId);", 
+                          new { title = taskToInsert.Title, description = taskToInsert.Description,
+                          dueDate = taskToInsert.DueDate, categoryId = taskToInsert.CategoryId, statusId = taskToInsert.StatusId });
         }
 
 
@@ -47,26 +44,25 @@ namespace ADHD_Manager.Models.Data
         {
             return _conn.Query<Category>("SELECT * FROM category;");
         }
-        public Tasks AssignCategory()
-        {
-            throw new NotImplementedException();
-        }
-
-
         public IEnumerable<Status> GetStatus()
         {
             return _conn.Query<Status>("SELECT * FROM status");
         }
-        public Tasks AssignStatus()
+        public Tasks AssignCategoryAndStatus()
         {
+            var categoryList = GetCategories();
             var statusList = GetStatus();
             var task = new Tasks();
+
+            task.Categories = categoryList;
             task.Statuses = statusList;
+
             return task;
         }
-        public Tasks UpdateStatus()
+
+        public void DeleteTasks(Tasks task)
         {
-            throw new NotImplementedException();
+            _conn.Execute("DELETE FROM tasks WHERE TaskID = @taskId", new { taskId = task.TaskID });
         }
     }
 }
