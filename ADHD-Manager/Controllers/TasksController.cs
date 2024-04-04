@@ -13,9 +13,22 @@ namespace ADHD_Manager.Controllers
             this.repo = repo;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(string categoryFilter, string statusFilter)
         {
             var tasks = repo.GetAllTasks();
+
+            if (!string.IsNullOrEmpty(categoryFilter))
+            {
+                int categoryId = int.Parse(categoryFilter);
+                tasks = tasks.Where(t => t.CategoryId == categoryId);
+            }
+
+            if (!string.IsNullOrEmpty(statusFilter))
+            {
+                int statusId = int.Parse(statusFilter);
+                tasks = tasks.Where(t => t.StatusId == statusId);
+            }
+
             return View(tasks);
         }
 

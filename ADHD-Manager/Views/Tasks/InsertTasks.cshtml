@@ -26,8 +26,8 @@
     </div>
 
     <div class="form-group">
-        <label for="">Select Category</label>
-        <select class="form-control" name="CategoryID" value="">
+        <label for="">Select Status</label>
+        <select class="form-control" name="StatusID" value="">
             @foreach (var stat in Model.Statuses)
             {
                 <option value="@stat.StatusId">@stat.StatusId @stat.Name</option>
@@ -35,5 +35,6 @@
         </select>
     </div>
 
-    <input type="submit" value="Create Task" class="btn btn-outline-dark" />
+    <input type="submit" value="Create Task" class="btn btn-outline-dark mt-2 me-2" />
+    <a class="btn btn-outline-danger mt-2 ms-2" asp-area="" asp-controller="Tasks" asp-action="Index">Cancel</a>
 }

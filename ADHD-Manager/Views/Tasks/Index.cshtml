@@ -1,9 +1,38 @@
 ﻿
 @model IEnumerable<Tasks>
 
+<h2 class="mb-2 mt-2 flex-fill">Tasks</h2>
+
 <div class="d-flex flex-row align-items-center justify-content-between">
-    <h2 class="mb-2 mt-2 flex-fill">Tasks</h2>
+
     <a class="btn btn-outline-dark text-bg-dark m-2" href="/Tasks/InsertTasks/">Add New Task</a>
+
+    @using (Html.BeginForm("Index", "Tasks", FormMethod.Get))
+    {
+        <div class="btn-group">
+
+            @Html.DropDownList("categoryFilter", new SelectList(new[] 
+            {
+                new SelectListItem { Text = "All Categories", Value = "" },
+                new SelectListItem { Text = "Work", Value = "1" },
+                new SelectListItem { Text = "Personal", Value = "2" },
+                new SelectListItem { Text = "Home", Value = "3" },
+                new SelectListItem { Text = "Shopping", Value = "4" }
+            }, "Value", "Text"), "Select Category", new { @class = "btn btn-outline-dark m-2" })
+
+            @Html.DropDownList("statusFilter", new SelectList(new[] 
+            {
+                new SelectListItem { Text = "All Statuses", Value = "" },
+                new SelectListItem { Text = "Open", Value = "1" },
+                new SelectListItem { Text = "Completed", Value = "2" },
+                new SelectListItem { Text = "Over Due", Value = "3" }
+            }, "Value", "Text"), "Select Status", new { @class = "btn btn-outline-dark m-2" })
+
+            <button type="submit" class="btn btn-outline-dark m-2">Apply Filter</button>
+            <a href="/Tasks/Index" class="btn btn-outline-dark m-2">Reset Filter</a>
+
+        </div>        
+    }
 </div>
 
 <div class="d-flex flex-row m-3">
@@ -38,13 +67,16 @@
                 @switch (task.StatusId)
                 {
                     case 1:
-                        <h6 class="card-subtitle mb-2">Status: Open</h6>
+                        <h6 class="card-subtitle mb-2 mt-4">Status: Open</h6>
                         break;
                     case 2:
-                        <h6 class="card-subtitle mb-2">Status: Completed</h6>
+                        <h6 class="card-subtitle mb-2 mt-4">Status: Completed</h6>
                         break;
                     case 3:
-                        <h6 class="card-subtitle mb-2">Status: Over Due</h6>
+                        <h6 class="card-subtitle mb-2 mt-4">Status: Over Due</h6>
+                        break;
+                    default:
+                        <h6 class="card-subtitle mb-2 mt-4">Status: None</h6>
                         break;
                 }
                 <div class="d-flex flex-row">
