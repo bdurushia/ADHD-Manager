@@ -29,6 +29,16 @@ namespace ADHD_Manager.Controllers
                 tasks = tasks.Where(t => t.StatusId == statusId);
             }
 
+            DateTime currentTime = DateTime.Now;
+            foreach (var task in tasks)
+            {
+                if (currentTime > task.DueDate && task.StatusId != 2)
+                {
+                    task.StatusId = 3;
+                    repo.UpdateStatusTasks(task);
+                }
+            }
+
             return View(tasks);
         }
 
@@ -77,6 +87,12 @@ namespace ADHD_Manager.Controllers
         public IActionResult DeleteTasks(Tasks task)
         {
             repo.DeleteTasks(task);
+            return RedirectToAction("Index");
+        }
+
+        public IActionResult CompleteTasks(int id)
+        {
+            repo.CompleteTasks(id);
             return RedirectToAction("Index");
         }
     }

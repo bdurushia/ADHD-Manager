@@ -14,5 +14,7 @@ namespace ADHD_Manager.Models.Data
         public Tasks AssignCategoryAndStatus();
 
         public IEnumerable<Status> GetStatus();
+        public void UpdateStatusTasks(Tasks taskToUpdate);
+        public void CompleteTasks(int id);
     }
 }

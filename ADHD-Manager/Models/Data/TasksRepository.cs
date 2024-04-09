@@ -16,7 +16,7 @@ namespace ADHD_Manager.Models.Data
         public IEnumerable<Tasks> GetAllTasks()
         {
             // return _conn.Query<Tasks>("SELECT * FROM tasks JOIN status ON tasks.StatusID = status.StatusID;");
-            return _conn.Query<Tasks>("SELECT * FROM tasks;");
+            return _conn.Query<Tasks>("SELECT * FROM tasks ORDER BY StatusID DESC;");
         }
 
         public Tasks GetTask(int taskId)
@@ -63,6 +63,18 @@ namespace ADHD_Manager.Models.Data
         public void DeleteTasks(Tasks task)
         {
             _conn.Execute("DELETE FROM tasks WHERE TaskID = @taskId", new { taskId = task.TaskID });
+        }
+
+        public void UpdateStatusTasks(Tasks taskToUpdate)
+        {
+            _conn.Execute("UPDATE tasks SET StatusID = @statusId WHERE TaskID = @taskId", 
+                new { statusId = taskToUpdate.StatusId, taskId = taskToUpdate.TaskID });
+        }
+
+        public void CompleteTasks(int id)
+        {
+            _conn.Execute("UPDATE tasks SET StatusID = 2 WHERE TaskID = @id",
+                new { id });
         }
     }
 }
