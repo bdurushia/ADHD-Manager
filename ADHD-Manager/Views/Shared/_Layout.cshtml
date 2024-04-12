@@ -25,7 +25,13 @@
                         <li class="nav-item">
                             <a class="nav-link" asp-area="" asp-controller="Tasks" asp-action="Index">Tasks</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-controller="PomodoroTimer" asp-action="Index">Pomodoro</a>
+                        </li>
                     </ul>
+                </div>
+                <div>
+                    <p>Timer: <span id="navTimer">25:00</span></p>
                 </div>
                 <div>
                     <p class="m-3">@DateTime.Now.ToString("MM-dd-yyyy h:mm tt")</p>

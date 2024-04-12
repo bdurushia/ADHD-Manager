@@ -1,0 +1,22 @@
+﻿@model PomodoroTimer
+
+<script src="./js/timer.js"></script>
+
+<div class="d-flex flex-column justify-content-center align-content-center text-center">
+
+
+    <h4 class="mb-5">Pomodoro Timer</h4>
+
+    <h1 id="timerDisplay">25:00</h1>
+
+
+    <div class="d-flex flex-row justify-content-center align-content-center mt-5">
+
+        <button id="startButton" class="btn btn-light text-bg-dark ms-2 me-2 card-button" onclick="startTimer()">Start</button>
+        <button id="stopButton" class="btn btn-light text-bg-dark ms-2 me-2 card-button" onclick="stopTimer()">Stop</button>
+        <button id="resetButton" class="btn btn-light text-bg-dark ms-2 me-2 card-button" onclick="resetTimer()">Reset</button>
+
+    </div>
+
+</div>
+
