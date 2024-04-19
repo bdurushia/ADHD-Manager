@@ -3,6 +3,37 @@ let remainingSeconds;
 let timerPaused = false;
 let isRunning = false;
 
+// function to switch to short break
+function setShortBreak() {
+    $.get('/PomodoroTimer/SetShortBreak')
+        .done(function (response) {
+            remainingSeconds = response;
+            updateTimerDisplay();
+        }).fail(function (err) {
+            console.error('Error setting short break timer: ', err)
+        });
+}
+// function to switch to long break
+function setLongBreak() {
+    $.get('/PomodoroTimer/SetLongBreak')
+        .done(function (response) {
+            remainingSeconds = response;
+            updateTimerDisplay();
+        }).fail(function (err) {
+            console.error('Error setting long break timer: ', err)
+        });
+}
+// function to switch to pmodoro focus
+function setPomodoroTime() {
+    $.get('/PomodoroTimer/SetPomodoroTime')
+        .done(function (response) {
+            remainingSeconds = response;
+            updateTimerDisplay();
+        }).fail(function (err) {
+            console.error('Error setting pomodoro timer: ', err)
+        });
+}
+
 function updateTimerDisplay() {
     let minutes = Math.floor(remainingSeconds / 60);
     let seconds = remainingSeconds % 60;
@@ -11,8 +42,6 @@ function updateTimerDisplay() {
     timeDisplay.innerHTML = minutes.toString().padStart(2, '0') + ':' + seconds.toString().padStart(2, '0');
 }
 
-
-// clicking timer start button multiple times messes with the timer speed and it needs fixing.
 function startTimer() {
     if (!isRunning) {
         $.get('/PomodoroTimer/Start')

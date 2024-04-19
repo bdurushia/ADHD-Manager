@@ -1,6 +1,5 @@
 ﻿using ADHD_Manager.Models;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.SignalR;
 using System.Threading.Tasks;
 using System.Timers;
 
@@ -11,7 +10,8 @@ namespace ADHD_Manager.Controllers
         private PomodoroTimer _timer;
         private System.Timers.Timer _countDownTimer;
         private int _remainingSeconds;
-        private int _pauseTime;
+        private bool _shortBreak { get; set; }
+        private bool _longBreak { get; set; }
 
         public PomodoroTimerController()
         {
@@ -27,11 +27,9 @@ namespace ADHD_Manager.Controllers
         {
             _timer.IsRunning = true;
 
-            // Start Timer logic here
-            // Set the duration to 25 minutes
             if (_remainingSeconds <= 0)
             {
-                _remainingSeconds = 25 * 60;
+                SetTime(_shortBreak, _longBreak);
             }
 
             // Create and start the countdown timer
@@ -71,12 +69,55 @@ namespace ADHD_Manager.Controllers
 
         public IActionResult Reset()
         {
-            _timer.StartTime = 25 * 60;
+            // _timer.StartTime = 25 * 60;
+            _timer.StartTime = SetTime(_shortBreak, _longBreak);
             _timer.IsRunning = false;
 
-            // Reset Timer logic here
-
             return Ok(_timer.StartTime);
+        }
+
+        public IActionResult SetPomodoroTime()
+        {
+            _shortBreak = false;
+            _longBreak = false;
+            SetTime(_shortBreak, _longBreak);
+
+            return Ok(_remainingSeconds);
+        }
+
+        public IActionResult SetShortBreak()
+        {
+            _shortBreak = true;
+            _longBreak = false;
+            SetTime(_shortBreak, _longBreak);
+
+            return Ok(_remainingSeconds);
+        }
+        public IActionResult SetLongBreak()
+        {
+            _shortBreak = false;
+            _longBreak = true;
+            SetTime(_shortBreak, _longBreak);
+
+            return Ok(_remainingSeconds);
+        }
+
+        private int SetTime(bool _shortBreak, bool _longBreak)
+        {
+            if (_shortBreak == false && _longBreak == true)
+            {
+                _remainingSeconds = 15 * 60;
+            }
+            else if (_shortBreak == true && _longBreak == false)
+            {
+                _remainingSeconds = 5 * 60;
+            }
+            else
+            {
+                _remainingSeconds = 25 * 60;
+            }
+
+            return _remainingSeconds;
         }
     }
 }

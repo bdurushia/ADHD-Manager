@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - ADHD Task Manager</title>
+    <title>@ViewData["Title"] - ADDFocus</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/ADHD_Manager.styles.css" asp-append-version="true" />
@@ -12,7 +12,7 @@
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">ADHD Task Manager</a>
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">ADDFocus</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -31,9 +31,6 @@
                     </ul>
                 </div>
                 <div>
-                    <p>Timer: <span id="navTimer">25:00</span></p>
-                </div>
-                <div>
                     <p class="m-3">@DateTime.Now.ToString("MM-dd-yyyy h:mm tt")</p>
                 </div>
             </div>
@@ -47,7 +44,8 @@
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2024 - ADHD_Manager - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            &copy; 2024 - ADDFocus - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            <p id="notice" class="text center p-2 w-30">NOTICE:<br>This application is currently under development.</p>
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>

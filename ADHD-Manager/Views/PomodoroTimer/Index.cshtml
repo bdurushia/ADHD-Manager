@@ -4,10 +4,13 @@
 
 <div class="d-flex flex-column justify-content-center align-content-center text-center">
 
+    <div class="d-flex flex-row justify-content-center align-content-center">
+        <button id="setPomodoroTimeButton" class="btn btn-outline-light ms-2 me-2 align-items-center" onclick="setPomodoroTime()"><h4>Pomodoro</h4></button>
+        <button id="setShortBreakButton" class="btn btn-outline-light ms-2 me-2" onclick="setShortBreak()"><h4>Short Break</h4></button>
+        <button id="setLongBreakButton" class="btn btn-outline-light ms-2 me-2" onclick="setLongBreak()"><h4>Long Break</h4></button>
+    </div>
 
-    <h4 class="mb-5">Pomodoro Timer</h4>
-
-    <h1 id="timerDisplay">25:00</h1>
+    <h1 id="timerDisplay" class="mt-5" style="font-size:10rem;">25:00</h1>
 
 
     <div class="d-flex flex-row justify-content-center align-content-center mt-5">
