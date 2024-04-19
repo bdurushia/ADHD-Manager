@@ -13,9 +13,32 @@ namespace ADHD_Manager.Controllers
             this.repo = repo;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(string categoryFilter, string statusFilter)
         {
             var tasks = repo.GetAllTasks();
+
+            if (!string.IsNullOrEmpty(categoryFilter))
+            {
+                int categoryId = int.Parse(categoryFilter);
+                tasks = tasks.Where(t => t.CategoryId == categoryId);
+            }
+
+            if (!string.IsNullOrEmpty(statusFilter))
+            {
+                int statusId = int.Parse(statusFilter);
+                tasks = tasks.Where(t => t.StatusId == statusId);
+            }
+
+            DateTime currentTime = DateTime.Now;
+            foreach (var task in tasks)
+            {
+                if (currentTime > task.DueDate && task.StatusId != 2)
+                {
+                    task.StatusId = 3;
+                    repo.UpdateStatusTasks(task);
+                }
+            }
+
             return View(tasks);
         }
 
@@ -47,6 +70,30 @@ namespace ADHD_Manager.Controllers
         {
             repo.UpdateTasks(task);
             return RedirectToAction("ViewTasks", new { id = task.TaskID });
+        }
+
+        public IActionResult InsertTasks()
+        {
+            var newTask = repo.AssignCategoryAndStatus();
+            return View(newTask);
+        }
+
+        public IActionResult InsertTaskToDatabase(Tasks taskToInsert)
+        {
+            repo.InsertTasks(taskToInsert);
+            return RedirectToAction("Index");
+        }
+
+        public IActionResult DeleteTasks(Tasks task)
+        {
+            repo.DeleteTasks(task);
+            return RedirectToAction("Index");
+        }
+
+        public IActionResult CompleteTasks(int id)
+        {
+            repo.CompleteTasks(id);
+            return RedirectToAction("Index");
         }
     }
 }
